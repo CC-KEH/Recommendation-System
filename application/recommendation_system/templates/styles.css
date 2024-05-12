@@ -1,0 +1,79 @@
+/* Style improvements for the UI */
+body {
+    background-color: #191919;
+    color: #dee2e6;
+    /* background-image: url('movies.jpg'); */
+    background-repeat:initial;
+}
+
+.container {
+    max-width: 600px;
+    margin-top: 70px;
+}
+.container .text-center {
+    margin-bottom: 50px;
+}
+
+
+/** Navbar  */
+
+.nav-tabs {
+    margin-bottom: 40px;
+    display: flex;
+    justify-content: center;
+}
+.nav-tabs .nav-link:hover {
+    border: none;
+    color: #7671db;
+}
+
+.nav-item .nav-link {
+    color: #dee2e6;
+    border: none;
+    font-size:x-large;
+}
+
+.nav-item .nav-link:active {
+    color: #5852c9;
+}
+
+/** Tab */
+
+.tab-pane {
+    padding: 20px;
+    background-color: #2e2e2e;
+    border: 2px solid #5852c9;
+    border-radius: 5px;
+}
+
+.tab-pane input {
+    margin-bottom: 10px;
+}
+
+.tab-pane button {
+    width: 100%;
+    margin-top: 10px;
+    background-color: #5852c9;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    color: white;
+}
+
+.tab-pane button:hover {
+    background-color: #7671db;
+    color:white
+}
+
+.top_div{
+    margin-top: 50px;
+    text-align: center;
+}
+th{
+    text-align: center;
+    color: white;
+}
+td{
+    text-align: center;
+    color: white;
+}

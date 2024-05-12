@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recommended Books</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        body {
+            background-image: url('books.jpg');
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-size: cover; /* Ensure the background image covers the entire body */
+            background-position: center; /* Center the background image */
+            background-attachment: fixed; /* Fixed background image */
+            background-repeat: no-repeat; /* Do not repeat the background image */
+        }
+        h1,h2 {
+            text-align: center;
+            color: white; /* Fallback color if gradient is not supported */
+        }
+        h1{
+            top: 20px;
+            margin-bottom: 30px;
+        }
+        input{
+            margin-bottom: 40px;
+        }
+        h2{
+            margin-bottom: 10px;
+        }
+        p {
+            color: #ffffff;
+        }
+        a{
+            text-decoration: none;
+        }
+        .master_container{
+            /* background-color: rgba(3, 3, 3, 0.65);  */
+            background-color: rgb(0, 0, 0); 
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            color: #fff; /* Text color */
+        }
+
+        .list-group{
+            margin-top: 20px;
+            display: grid;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            display: flex;
+            flex-direction: row;
+            overflow-x: auto;
+            white-space: nowrap;
+            justify-content: center;
+            gap: 30px;
+            -ms-overflow-style: none;
+            scrollbar-width: none; 
+            scroll-behavior: smooth;
+        }
+        .list-group::-webkit-scrollbar {
+            display: none;
+        }
+        .list-group-item{
+            background-color: rgba(3, 3, 3, 0.65); 
+            color: white; 
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            /* width: 200px; */
+            height: 300px;
+            min-width: 200px;
+        }
+        .list-group-item img {
+            width: 100%;
+            height: 200px;
+            margin-bottom: 10px;
+        }
+        .book_title {
+            width: 200px;
+            white-space: break-spaces;
+            overflow: hidden;
+            height: auto;
+        }
+        .genre{
+            font-size: 13px;
+            color: #f0f0f0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="master_container">
+    <div class="container">
+        <h1>Books Recommendation</h1>
+        <br>
+        <h2>Books Like {{ user_input }}</h2>
+    </div>
+    
+        <div class="list-group" id="moveList">
+
+            {% for book in recommended_books_data %}
+
+            <div class="list-group-item">
+                <img src="{{ book.1 }}" alt="{{ book.0 }}">
+                <p class="book_title">{{ book.0 }}</p>
+                <p class="genre">{{ book.2 }}</p>
+            </div>
+            {% endfor %}
+        </div>
+</div>
+</body>
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+</html>

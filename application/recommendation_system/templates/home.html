@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body{
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .container {
+            display: flex;
+            height: 100vh;
+            margin: 0;
+        }
+        .option {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-decoration: none;
+            color: rgb(198, 198, 198);
+            font-size: 2em;
+            border: 1px solid #ccc;
+        }
+        .option:hover {
+            color: white;
+        }
+        #movies {
+            border: none;
+            background-image: url('movies.jpg');
+        }
+        #songs {
+            border: none;
+            background-image: url('songs.avif');
+        }
+        #books {
+            border: none;
+            background-image: url('books.jpg');
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="/rcs/movies" class="option" id="movies">Movies</a>
+        <a href="/rcs/songs" class="option" id="songs">Songs</a>
+        <a href="/rcs/books" class="option" id="books">Books</a>
+    </div>
+</body>
+</html>

@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Books Recommendation</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        body {
+            background-image: url('books.jpg');
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-size: cover; /* Ensure the background image covers the entire body */
+            background-position: center; /* Center the background image */
+            background-attachment: fixed; /* Fixed background image */
+            background-repeat: no-repeat; /* Do not repeat the background image */
+        }
+        .master_container{
+            /* background-color: rgba(3, 3, 3, 0.65);  */
+            background-color: rgb(0, 0, 0); 
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            color: #fff; /* Text color */
+        }
+
+        .left_arrow{
+            position: absolute;
+            top: 72.3%;
+            left: 0;
+            transform: translateY(-50%);
+            background-color: rgba(3, 3, 3, 0.908); /* RGB values with an alpha (opacity) of 0.8 */
+            color: white; /* Fallback color if gradient is not supported */
+            padding: 10px;
+            width: 120px;
+            height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1;
+            cursor: pointer;
+        }
+        .right_arrow{
+            position: absolute;
+            top: 72.3%;
+            right: 0;
+            transform: translateY(-50%);
+            background-color: rgba(3, 3, 3, 0.908); /* RGB values with an alpha (opacity) of 0.8 */
+            color: white; /* Fallback color if gradient is not supported */
+            padding: 10px;
+            width: 120px;
+            height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1;
+            cursor: pointer;
+        }
+
+        .list-group{
+            margin-top: 20px;
+            display: grid;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            /* grid-gap: 1px; */
+            display: flex; /* Use flexbox for horizontal layout */
+            flex-direction: row;
+            overflow-x: auto;
+            white-space: nowrap;
+            gap: 10px;
+            -ms-overflow-style: none; /* IE and Edge */
+            scrollbar-width: none; /* Firefox */
+            scroll-behavior: smooth; /* Smooth scrolling behavior */
+        }
+        .list-group::-webkit-scrollbar {
+            display: none;
+        }
+        .list-group-item{
+            background-color: rgba(3, 3, 3, 0.65); 
+            color: white; 
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            /* width: 200px; */
+            height: 300px;
+            min-width: 200px;
+        }
+        .list-group-item img {
+            width: 100%;
+            height: 200px;
+            margin-bottom: 10px;
+        }
+        .book_title {
+            width: 100%;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            height: auto; /* Adjust height to fit content */
+        }
+
+        h1,h2 {
+            text-align: center;
+            color: white; /* Fallback color if gradient is not supported */
+        }
+        h1{
+            margin-bottom: 30px;
+        }
+        input{
+            margin-bottom: 40px;
+        }
+        h2{
+            margin-bottom: 10px;
+        }
+        p {
+            color: #ffffff;
+        }
+        a{
+            text-decoration: none;
+        }
+
+    </style>
+</head>
+
+<body>
+    <div class="master_container">
+    <div class="container">
+        <h1>Books Recommendation</h1>
+        <form method="POST" action="{% url 'recommend_books' %}">
+            {% csrf_token %}
+            <input type="text" id="search" name="book_name" class="form-control" placeholder="Search for a book">
+            <button type="submit" class="btn btn-primary">Recommend</button>
+        </form>
+        
+        <br>
+        <h2>Top 50 Books</h2>
+    </div>
+    
+        <div class="list-group" id="bookList">
+            <div class="left_arrow" onclick="scrollBooks('left')"><i class="fa fa-angle-left" style="font-size:48px;"></i></div>
+            <div class="right_arrow" onclick="scrollBooks('right')"><i class="fa fa-angle-right" style="font-size:48px;"></i></div>
+            
+            {% for book in books_data %}
+
+            <div class="list-group-item">
+                <img src="{{ book.1 }}" alt="{{ book.0 }}">
+                <p class="book_title">{{ book.0 }}</p>
+                <p>{{ book.2 }}</p>
+            </div>
+
+            {% endfor %}
+        </div>
+</div>
+</body>
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script>
+    function scrollBooks(direction) {
+        const bookList = document.getElementById("bookList");
+        const scrollAmount = 300; // Adjust scroll amount as needed
+        if (direction === "left") {
+            bookList.scrollLeft -= scrollAmount;
+        } else if (direction === "right") {
+            bookList.scrollLeft += scrollAmount;
+        }
+    }
+</script>
+</html>

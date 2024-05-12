@@ -164,3 +164,7 @@ cython_debug/
 
 data/
 research/data/
+application/data/
+application/recommendation_system/config.py
+*.csv
+*.pkl

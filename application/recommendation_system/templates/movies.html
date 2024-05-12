@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movies Recommendation</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        body {
+            background-image: url('Movies.jpg');
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-size: cover; /* Ensure the background image covers the entire body */
+            background-position: center; /* Center the background image */
+            background-attachment: fixed; /* Fixed background image */
+            background-repeat: no-repeat; /* Do not repeat the background image */
+        }
+        h1,h2 {
+            text-align: center;
+            color: white; /* Fallback color if gradient is not supported */
+        }
+        h1{
+            margin-bottom: 30px;
+        }
+        input{
+            margin-bottom: 40px;
+        }
+        h2{
+            margin-bottom: 10px;
+        }
+        p {
+            color: #ffffff;
+        }
+        a{
+            text-decoration: none;
+        }
+        .master_container{
+            /* background-color: rgba(3, 3, 3, 0.65);  */
+            background-color: rgb(0, 0, 0); 
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            color: #fff; /* Text color */
+        }
+
+        .left_arrow{
+            position: absolute;
+            top: 74.3%;
+            left: 0;
+            transform: translateY(-50%);
+            background-color: rgba(3, 3, 3, 0.908); /* RGB values with an alpha (opacity) of 0.8 */
+            color: white; /* Fallback color if gradient is not supported */
+            padding: 10px;
+            width: 120px;
+            height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1;
+            cursor: pointer;
+        }
+        .right_arrow{
+            position: absolute;
+            top: 74.3%;
+            right: 0;
+            transform: translateY(-50%);
+            background-color: rgba(3, 3, 3, 0.908); /* RGB values with an alpha (opacity) of 0.8 */
+            color: white; /* Fallback color if gradient is not supported */
+            padding: 10px;
+            width: 120px;
+            height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1;
+            cursor: pointer;
+        }
+
+        .list-group{
+            margin-top: 20px;
+            display: grid;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            display: flex;
+            flex-direction: row;
+            overflow-x: auto;
+            white-space: nowrap;
+            gap: 30px;
+            -ms-overflow-style: none;
+            scrollbar-width: none; 
+            scroll-behavior: smooth;
+        }
+        .list-group::-webkit-scrollbar {
+            display: none;
+        }
+        .list-group-item{
+            background-color: rgba(3, 3, 3, 0.65); 
+            color: white; 
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            /* width: 200px; */
+            height: 300px;
+            min-width: 200px;
+        }
+        .list-group-item img {
+            width: 100%;
+            height: 200px;
+            margin-bottom: 10px;
+        }
+        .movie_title {
+            width: 200px;
+            white-space: break-spaces;
+            overflow: hidden;
+            height: auto;
+        }
+        .genre{
+            font-size: 13px;
+            color: #f0f0f0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="master_container">
+    <div class="container">
+        <h1>Movies Recommendation</h1>
+        <!-- <input type="text" id="search" class="form-control" placeholder="Search for a move"> -->
+        <form method="POST" action="{% url 'recommend_movies' %}">
+            {% csrf_token %}
+            <input type="text" id="search" name="movie" class="form-control" placeholder="Search for a movie">
+            <input type="submit" value="Recommend">
+        </form>
+        <br>
+        <h2>Top 50 Movies</h2>
+    </div>
+    
+        <div class="list-group" id="moveList">
+            <div class="left_arrow" onclick="scrollMovies('left')"><i class="fa fa-angle-left" style="font-size:48px;"></i></div>
+            <div class="right_arrow" onclick="scrollMovies('right')"><i class="fa fa-angle-right" style="font-size:48px;"></i></div>
+            
+            {% for movie in movies_data %}
+
+            <div class="list-group-item">
+                <img src="{{ movie.1 }}" alt="{{ movie.0 }}">
+                <p class="movie_title">{{ movie.0 }}</p>
+                <p class="genre">{{ movie.2 }}</p>
+            </div>
+            {% endfor %}
+        </div>
+</div>
+</body>
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script>
+    function scrollMovies(direction) {
+        const moveList = document.getElementById("moveList");
+        const scrollAmount = 300; // Adjust scroll amount as needed
+        if (direction === "left") {
+            moveList.scrollLeft -= scrollAmount;
+        } else if (direction === "right") {
+            moveList.scrollLeft += scrollAmount;
+        }
+    }
+</script>
+</html>

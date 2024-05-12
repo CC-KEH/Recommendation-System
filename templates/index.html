@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Recommendation System</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center">Recommendation System</h1>
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link" id="movies-tab" data-toggle="tab" href="#movies" role="tab" aria-controls="movies" aria-selected="true">Movies</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="songs-tab" data-toggle="tab" href="#songs" role="tab" aria-controls="songs" aria-selected="false">Songs</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="books-tab" data-toggle="tab" href="#books" role="tab" aria-controls="books" aria-selected="false">Books</a>
+            </li>
+        </ul>
+        <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active" id="movies" role="tabpanel" aria-labelledby="movies-tab">
+                <input type="text" id="input" class="form-control" placeholder="Enter a movie">
+                <button class="btn" onclick="getRecommendation()">Get Movie Recommendation</button>
+                <div id="output"></div>
+            </div>
+            <div class="tab-pane fade" id="songs" role="tabpanel" aria-labelledby="songs-tab">
+                <input type="text" id="input" class="form-control" placeholder="Enter a song">
+                <button class="btn" onclick="getRecommendation()">Get Song Recommendation</button>
+                <div id="output"></div>
+            </div>
+            <div class="tab-pane fade" id="books" role="tabpanel" aria-labelledby="books-tab">
+                <input type="text" id="input" class="form-control" placeholder="Enter a book">
+                <button class="btn" onclick="getRecommendation()">Get Book Recommendation</button>
+                <div id="output"></div>
+            </div>
+        </div>
+        <div class="top_div">
+            <h2>Top 50 Movies</h2>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Rank</th>
+                        <th>Title</th>
+                        <th>Rating</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for movie in movies %}
+                    <tr>
+                        <td>{{ movie.rank }}</td>
+                        <td>{{ movie.title }}</td>
+                        <td>{{ movie.rating }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+        </div>
+    </div>
+    <script>
+        $(document).ready(function () {
+            // Function to handle tab switching and update placeholders and button text
+            $('#myTab a').on('click', function (e) {
+                e.preventDefault();
+                $(this).tab('show');
+                var type = $(this).text().toLowerCase();
+
+                // Update the input placeholder and button text based on the selected tab
+                $('#input').attr('placeholder', 'Enter a ' + type);
+                $('.btn').text('Get ' + type.charAt(0).toUpperCase() + type.slice(1) + ' Recommendation');
+            });
+
+            // Function to get recommendations from the server
+            function getRecommendation() {
+                var type = $('.nav-link.active').text().toLowerCase();
+                var input = $('#input').val();
+
+                $.ajax({
+                    url: `http://localhost:8000/${type}`,
+                    type: 'POST',
+                    data: JSON.stringify({ 'input': input }),
+                    contentType: 'application/json; charset=utf-8',
+                    dataType: 'json',
+                    success: function (data) {
+                        $('#output').html(data.recommendation);
+                    },
+                    error: function () {
+                        $('#output').html('An error occurred. Please try again.');
+                    }
+                });
+            }
+            
+            // Attach the getRecommendation function to the button click event
+            $('.btn').on('click', getRecommendation);
+        });
+    </script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="app.js"></script>
+</body>
+
+</html>
