@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
 <head>
@@ -26,15 +27,15 @@
         }
         #movies {
             border: none;
-            background-image: url('movies.jpg');
+            background-image: url("{% static 'img/movies.jpg' %}");
         }
         #songs {
             border: none;
-            background-image: url('songs.avif');
+            background-image: url("{% static 'img/songs.avif' %}");
         }
         #books {
             border: none;
-            background-image: url('books.jpg');
+            background-image: url("{% static 'img/books.jpg' %}");
         }
     </style>
 </head>

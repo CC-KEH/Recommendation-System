@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,7 +10,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
         body {
-            background-image: url('books.jpg');
+            background-image: url("{% static 'img/books.jpg' %}");
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-size: cover; /* Ensure the background image covers the entire body */
             background-position: center; /* Center the background image */
@@ -17,8 +18,8 @@
             background-repeat: no-repeat; /* Do not repeat the background image */
         }
         .master_container{
-            /* background-color: rgba(3, 3, 3, 0.65);  */
-            background-color: rgb(0, 0, 0); 
+            background-color: rgba(3, 3, 3, 0.65); 
+            /* background-color: rgb(0, 0, 0);  */
             position: absolute;
             top: 0;
             left: 0;
@@ -125,7 +126,10 @@
         a{
             text-decoration: none;
         }
-
+        button{
+            margin-top: 10px;
+            margin-left: 220px;
+        }
     </style>
 </head>
 
@@ -136,7 +140,7 @@
         <form method="POST" action="{% url 'recommend_books' %}">
             {% csrf_token %}
             <input type="text" id="search" name="book_name" class="form-control" placeholder="Search for a book">
-            <button type="submit" class="btn btn-primary">Recommend</button>
+            <button type="submit" class="btn btn-outline-light">Recommend</button>
         </form>
         
         <br>

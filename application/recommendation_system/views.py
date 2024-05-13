@@ -152,8 +152,7 @@ def rcs_recommend(request):
         books_pt = pickle.load(open('data/books/books_pt.pkl','rb'))
         similarity_scores = pickle.load(open('data/books/books_similarity_scores.pkl','rb'))
 
-        user_input = request.POST.get('book')
-
+        user_input = request.POST.get('book_name')
         recommended_books_data = recommend_books(books_df,books_pt,similarity_scores,user_input)
         return render(request, 'recommended_books.html', {'recommended_books_data': recommended_books_data, 'user_input': user_input})
     
