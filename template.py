@@ -19,9 +19,6 @@ list_of_files = [
     f'src/{project_name}/entity/config_entity.py',
     'requirements.txt',
     'Dockerfile',
-    'app.py',
-    'main.py',
-    'setup.py',
     'research/trials.ipynb',
     'templates/index.html'
 ]
