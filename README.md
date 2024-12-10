@@ -34,6 +34,11 @@ These instructions will get you a copy of the project up and running on your loc
 What things you need to install the software and how to install them.
 
 ```sh
+
+conda create -p venv python=3.11
+
+conda activate venv
+
 git clone https://github.com/CC-KEH/Recommendation-System.git
 
 pip install -r requirements.txt
