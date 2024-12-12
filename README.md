@@ -1,10 +1,12 @@
 # Recommendation System
 
-![Main Page](Images/options.png)
+![alt text](Images/Main.png)
 
 This is a recommendation system project. The project is structured as a Python application with a Django backend.
 
 ## The Project has 3 Recommendation Systems
+
+![Main Page](Images/options.png)
 
 - Songs Recommendation System
 - Movies Recommendation System
