@@ -74,17 +74,6 @@ def fetch_poster(movie_id):
     full_path = "https://image.tmdb.org/t/p/w500/" + poster_path
     return full_path
 
-def recommend_movies(movies,similarity,movie):
-    index = movies[movies['title'] == movie].index[0]
-    distances = sorted(list(enumerate(similarity[index])), reverse=True, key=lambda x: x[1])
-    recommended_movies_data = []
-    for i in distances[1:6]:
-        temp = []
-        movie_id = movies.iloc[i[0]].id
-        temp.append(fetch_poster(movie_id))
-        temp.append(movies.iloc[i[0]].title)
-        recommended_movies_data.append(temp)
-    return recommended_movies_data
 
 def get_top_50_movies(movies):
     movies_data = []
@@ -103,6 +92,19 @@ def get_songs_data(songs_df):
         temp.extend([row.track_name, row.poster, row.artists])
         songs_data.append(temp)
     return songs_data
+
+
+def recommend_movies(movies,similarity,movie):
+    index = movies[movies['title'] == movie].index[0]
+    distances = sorted(list(enumerate(similarity[index])), reverse=True, key=lambda x: x[1])
+    recommended_movies_data = []
+    for i in distances[1:6]:
+        temp = []
+        movie_id = movies.iloc[i[0]].id
+        temp.append(fetch_poster(movie_id))
+        temp.append(movies.iloc[i[0]].title)
+        recommended_movies_data.append(temp)
+    return recommended_movies_data
 
 def recommend_songs(song):
     suggestions = []

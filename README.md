@@ -1,5 +1,7 @@
 # Recommendation System
 
+[Demo Video](https://www.youtube.com/watch?v=v4ra9ouS574&ab_channel=Arbash)
+
 ![alt text](Images/Main.png)
 
 This is a recommendation system project. The project is structured as a Python application with a Django backend.
@@ -42,6 +44,8 @@ conda create -p venv python=3.11
 conda activate venv
 
 git clone https://github.com/CC-KEH/Recommendation-System.git
+
+cd Recommendation-System/application
 
 pip install -r requirements.txt
 
